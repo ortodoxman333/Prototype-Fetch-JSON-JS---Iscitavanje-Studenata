@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment - Šablon za kreiranje objekata studenata</title>
+
+    <style>
+
+        #my-text-area {
+            display:block;
+            width: 30%;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="my-text-area" rows="40"></textarea>
+    
+<script>
+	
+    let textArea = document.getElementById ("my-text-area")
+
+    async function getData () {
+                  try {
+                    let data = await fetch("https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt");
+
+                    if (data.status !== 200) {
+                          throw new Error ("Data Error");
+                      }
+
+                     let text = await data.text();
+                     let studentsData = text.split("\n");
+                     let student = Split(studentsData);
+                    
+                     } catch (err) {
+
+                    textArea.innerHTML = "Fetch problem";
+
+                  }
+                  
+              }
+              
+              function Split(x) {
+                        while (x.length > 0)  
+                         {
+                            let a = x.splice(0,4);
+                            let b = new Student(this.name=a[0],this.address=a[1],this.phone=a[2], this.course=a[3]);
+                            let student1 = b.getInfo();
+                            textArea.innerHTML += student1;
+                         }
+                         return;
+                     }
+                     
+              function Student (name,address,phone,course) {
+                this.name = name;
+                this.address = address;
+                this.phone = phone;
+                this.course = course;
+                
+               
+            }
+            Student.prototype.getInfo = function() {
+                    return "\n"+
+                          "Name : " + this.name + "\n"+
+                          "Adress : " + this.address + "\n"+
+                          "Phone : " + this.phone + "\n"+
+                           "Course : " + this.course +
+                           "\n"
+            }
+
+            getData();
+
+</script>
+	
+
+</body>
+</html>
